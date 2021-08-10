@@ -1,0 +1,291 @@
+#!/bin/bash
+
+if [ $# = 2 ]  #checking number of parameters
+
+then
+
+if [[ $2 != [0-9]* ]]
+
+then
+
+echo
+
+echo "Intiger value required in 2nd parameter"
+
+exit
+
+else
+
+echo
+
+fi
+
+else
+
+echo "Enter two Parameters username and id "
+
+exit
+
+fi
+
+secret() {
+
+echo -e "Enter Secret key:\c"
+
+read Secret
+
+if [ "$Secret" != "pass" ]
+
+then
+
+echo "Enter correct KEy"
+
+count=$(( $count + 1 ))
+
+if [ $count -gt 3 ]
+
+then
+
+echo "exit"
+
+exit
+
+else
+
+secret
+
+fi
+
+else
+
+echo
+
+fi
+
+}
+
+secret
+
+echo "Welcome prac1"
+
+echo -e "FirstName:$1"
+
+echo -e "Lomdon ID:$2"
+
+date
+
+countries() {
+
+echo -e "S.N Country Name \tcode"
+
+echo -e "1.  Brazil \t\tBRZ"
+
+echo -e "2.  Argentina \t\tARG"
+
+echo -e "3.  Nepal \t\tNEP"
+
+echo -e "4.  China \t\tCHI"
+
+echo -e "5.  England \t\tENG"
+
+echo -e "Enter Country Code:\c"
+
+read Country
+
+if [[ $Country != NEP ]]
+
+then
+
+echo "this is not fav country"
+
+countries
+
+else
+
+echo "this is fav contry"
+
+fi
+
+}
+
+countries
+
+choose() {
+
+echo -e "S.N Player Name \tcode"
+
+echo -e "1.  Lional Messi \tLM"
+
+echo -e "2.  Neymar Junior \tNJ"
+
+echo -e "3.  Kiran Chemjong \tKC"
+
+echo -e "4.  Zheng Zhi \t\tZZ"
+
+echo -e "5.  Harry Kane \t\tHK"
+
+echo -e "Enter three player Code:\c"
+
+read player1 player2 player3
+
+best=($player1 $player2 $player3)
+
+        if [[ ${#best[@]} -ne 3 ]]
+
+                then
+
+                echo "Enter 3 codes"
+
+                choose
+
+        else
+
+                if [ $player1 = "LM" ] || [ $player1 = "NJ" ] || [ $player1 = "KC" ] || [ $player1 = "ZZ" ] || [ $player1 = "HK" ] &&
+
+                [ $player2 = "LM" ] || [ $player2 = "NJ" ] || [ $player2 = "KC" ] || [ $player2 = "ZZ" ] || [ $player2 = "HK" ] &&
+
+                [ $player3 = "LM" ] || [ $player3 = "NJ" ] || [ $player3 = "KC" ] || [ $player3 = "ZZ" ] || [ $player3 = "HK" ]
+
+                        then
+
+                        if [ $player1 = $player2 ] && [ $player2 = $player3 ] && [ $player1 = $player3 ]
+
+                                then
+
+                                echo "Enter Different code"
+
+                                choose
+
+                        else
+
+echo "list"
+
+                        fi
+
+                else
+
+                       echo "player code is incorrect"
+
+                        choose
+
+                fi
+
+        fi
+
+}
+
+choose
+
+selects() {
+
+        PS3="select one player from list:"
+
+        play="$player1 $player2 $player3"
+
+        select i in $play
+
+        do
+
+        if [[ -n "$i" ]]
+
+                then
+
+                case $i in
+
+                "LM")
+
+                cat LM
+
+                break
+
+                ;;
+
+                "NJ")
+
+                cat NJ
+
+                break
+
+;;
+
+                "KC")
+
+                cat KC
+
+                break
+
+                ;;
+
+                "ZZ")
+
+                echo -e "mising!!"
+
+                countries
+
+                break
+
+                ;;
+
+                "HK")
+
+                echo -e "mising"
+
+                countries
+
+                break
+
+                ;;
+
+                esac
+
+        else
+
+                echo "Enter a correct number"
+
+                echo "wrong choice, try again "
+
+        fi
+
+        done
+
+}
+
+selects
+
+restart() {
+
+echo -e "DO U WANT TO REEXECUTE\c"
+
+read dodey
+
+if [[ $dodey = yes ]]
+
+then
+
+countries
+
+choose
+
+selects
+
+restart
+
+elif [[ $dodey = no ]]
+
+then
+
+echo "Exit"
+
+exit
+
+else
+
+echo "Enter yes or no"
+
+restart
+
+fi
+
+}
+
+restart
